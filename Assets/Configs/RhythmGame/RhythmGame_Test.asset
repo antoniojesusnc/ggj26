@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275ffbaa7e712384bbff4f85c6dd98b5, type: 3}
   m_Name: RhythmGame_Test
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
+  <AudioClip>k__BackingField: {fileID: 0}
+  <BeatOffset>k__BackingField: 0.1
+  <InitialWait>k__BackingField: 8
   <Waves>k__BackingField: 5
-  <AmountInputsTogheterRange>k__BackingField: {x: 2, y: 5}
+  <AmountInputsTogetherRange>k__BackingField: {x: 2, y: 4}
   <BeatsBetweenInputsRange>k__BackingField: {x: 5, y: 8}
   <InputsInLevel>k__BackingField: 00000000010000000200000003000000
+  <RateForNewInput>k__BackingField: 1
+  <RateForRepeatInput>k__BackingField: 0.25
