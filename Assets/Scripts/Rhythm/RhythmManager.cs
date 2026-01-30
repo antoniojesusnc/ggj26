@@ -1,0 +1,42 @@
+using ggj26.Event;
+using ggj26.Services;
+using Supyrb;
+using UnityEngine;
+
+namespace ggj26
+{
+    public class RhythmManager : Singleton<RhythmManager>
+    {
+        [field: SerializeField]
+        public RhythmManagerConfig Config { get; private set; }
+
+        private float _timestamp;
+        
+        public void InitGame()
+        {
+            _timestamp = 0;
+            ClockService.Instance.SubscribeToUpdate(CustomUpdate);
+        }
+
+        private void CustomUpdate(float deltaTime)
+        {
+            _timestamp += deltaTime;
+
+            if (IsTimeToBeat())
+            {
+                _timestamp -= Config.Bmp / 60f;
+                MakeBeat();
+            }
+        }
+
+        private void MakeBeat()
+        {
+            Signals.Get<OnBeatEvent>().Dispatch();
+        }
+
+        private bool IsTimeToBeat()
+        {
+            return _timestamp >= Config.Bmp / 60f;
+        }
+    }
+}
