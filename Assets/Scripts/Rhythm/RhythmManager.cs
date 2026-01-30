@@ -9,11 +9,15 @@ namespace ggj26
     {
         [field: SerializeField]
         public RhythmManagerConfig Config { get; private set; }
+        
+        public float CurrentWave { get; private set; }
 
         private float _timestamp;
-        
-        public void InitGame()
+        private RhythmGameConfig _levelConfig;
+
+        public void InitGame(RhythmGameConfig levelConfig)
         {
+            _levelConfig = levelConfig;
             _timestamp = 0;
             ClockService.Instance.SubscribeToUpdate(CustomUpdate);
         }

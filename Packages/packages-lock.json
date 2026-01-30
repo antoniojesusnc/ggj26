@@ -9,6 +9,15 @@
       },
       "hash": "70937d2ce39b61c29c4feb4d13642c65bb553d6c"
     },
+    "com.domybest.mybox": {
+      "version": "https://github.com/Deadcows/MyBox.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "hash": "afba2388773b7eeb9fec8ae9841c6db34969a54b"
+    },
     "com.supyrb.signals": {
       "version": "https://github.com/supyrb/signals.git",
       "depth": 0,
