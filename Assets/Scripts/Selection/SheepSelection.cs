@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ggj26
 {
@@ -11,12 +12,15 @@ namespace ggj26
         [SerializeField] private int sheepColumns = 8;
         [SerializeField] private float sheepSeparationX = 1.0f;
         [SerializeField] private float sheepSeparationY = 1.5f;
+        [SerializeField] private int nextSceneID = 0;
+        [SerializeField] private bool isSelection = true;
 
 
         private GameObject[][] sheepFlock;
         private int sheepSkin = 0;
         private SheepController sheepControler;
         private TextMeshPro sheepChar;
+        private bool wolfChose = false;
 
         private void Start()
         {
@@ -117,70 +121,98 @@ namespace ggj26
 
         private void GetSheepSelection()
         {
+            if (wolfChose) return;
+            wolfChose = true;
+
+            int pickedSheep = -1;
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                RhythmManager.Instance.SetWolfID(0);
+                pickedSheep = 0;
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
-                RhythmManager.Instance.SetWolfID(1);
+                pickedSheep = 1;
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                RhythmManager.Instance.SetWolfID(2);
+                pickedSheep = 2;
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
-                RhythmManager.Instance.SetWolfID(3);
+                pickedSheep = 3;
             }
             else if (Input.GetKeyDown(KeyCode.T))
             {
-                RhythmManager.Instance.SetWolfID(4);
+                pickedSheep = 4;
             }
             else if (Input.GetKeyDown(KeyCode.Y))
             {
-                RhythmManager.Instance.SetWolfID(5);
+                pickedSheep = 5;
             }
             else if (Input.GetKeyDown(KeyCode.U))
             {
-                RhythmManager.Instance.SetWolfID(6);
+                pickedSheep = 6;
             }
             else if (Input.GetKeyDown(KeyCode.I))
             {
-                RhythmManager.Instance.SetWolfID(7);
+                pickedSheep = 7;
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                RhythmManager.Instance.SetWolfID(8);
+                pickedSheep = 8;
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                RhythmManager.Instance.SetWolfID(9);
+                pickedSheep = 9;
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
-                RhythmManager.Instance.SetWolfID(10);
+                pickedSheep = 10;
             }
             else if (Input.GetKeyDown(KeyCode.F))
             {
-                RhythmManager.Instance.SetWolfID(11);
+                pickedSheep = 11;
             }
             else if (Input.GetKeyDown(KeyCode.G))
             {
-                RhythmManager.Instance.SetWolfID(12);
+                pickedSheep = 12;
             }
             else if (Input.GetKeyDown(KeyCode.H))
             {
-                RhythmManager.Instance.SetWolfID(13);
+                pickedSheep = 13;
             }
             else if (Input.GetKeyDown(KeyCode.J))
             {
-                RhythmManager.Instance.SetWolfID(14);
+                pickedSheep = 14;
             }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                RhythmManager.Instance.SetWolfID(15);
+                pickedSheep = 15;
             }
+
+            if (isSelection)
+            {
+                RhythmManager.Instance.SetWolfID(pickedSheep);
+            }
+            else
+            {
+                TextMeshPro tmp;
+                tmp = GetComponentInChildren<TextMeshPro>();
+
+                if (pickedSheep == RhythmManager.Instance.GetWolfID())
+                {
+                    //Wolf dies
+                    tmp.text = "LACK OF GROOVE KILLED THE WOLF";
+                }
+                else
+                {
+                    //A sheep dies
+                    tmp.text = "SMOOTH WOLF... BON APPETIT!";
+                }
+            }
+
+            SceneManager.LoadScene(nextSceneID);
         }
     }
 }

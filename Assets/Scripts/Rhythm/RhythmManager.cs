@@ -118,5 +118,10 @@ namespace ggj26
             wolfID = id;
             Debug.Log("Wolf chose mask #" +  wolfID);
         }
+
+        public int GetWolfID()
+        {
+            return wolfID;
+        }
     }
 }
