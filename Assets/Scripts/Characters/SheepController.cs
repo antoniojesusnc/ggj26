@@ -19,6 +19,8 @@ namespace ggj26
         private Vector2 _directionMovement;
         private Vector2 _movementArea;
         private Vector3 _centerPoint;
+        private bool _inMovement;
+        private TimerModel _timeModel;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
@@ -62,13 +64,20 @@ namespace ggj26
             _ignoreNextInputBeat = true;
 
             var anticipationTime = RhythmManager.Instance.BitEachSeconds * (1-_config.AnticipationRateFromBeatTime);
-            ClockService.Instance.AddDelayCall(anticipationTime, () => MoveSheep(nextBeat.Input));
+            _timeModel = ClockService.Instance.AddDelayCall(anticipationTime, () => MoveSheep(nextBeat.Input));
         }
 
         void OnDestroy()
         {
-            ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
+            if (_inMovement)
+            {
+                ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
+            }
             Signals.Get<OnBeatInputEvent>().RemoveListener(OnMoveSheep);
+            Signals.Get<OnGameBeginEvent>().RemoveListener(OnGameBegin);
+            Signals.Get<OnGameOverEvent>().RemoveListener(OnGameOver);
+            Signals.Get<OnBeatEvent>().RemoveListener(OnBeat);
+            _timeModel?.Dispose();
         }
 
         private void OnMoveSheep(InputsTypes input)
@@ -131,7 +140,7 @@ namespace ggj26
 
         protected virtual void AfterAnimation()
         {
-            ClockService.Instance.AddDelayCall(
+            _timeModel = ClockService.Instance.AddDelayCall(
                 RhythmManager.Instance.BitEachSeconds * _config.BeatRateToComeBackAnimation,
                 () => MoveSheep(InputsTypes.None));
         }
@@ -150,6 +159,7 @@ namespace ggj26
             _movementArea = movementArea;
             _directionMovement = ((Random.insideUnitCircle + transform.position.ToVector2()) - transform.position.ToVector2()).normalized;
             ClockService.Instance.SubscribeToUpdate(CustomUpdate);
+            _inMovement = true;
         }
 
         private void CustomUpdate(float deltaTime)

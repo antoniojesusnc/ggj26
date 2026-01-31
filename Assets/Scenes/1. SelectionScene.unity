@@ -577,7 +577,9 @@ MonoBehaviour:
   sheepSeparationX: 1.4
   sheepSeparationY: 3.4
   nextSceneID: 2
+  firstScene: 0
   isSelection: 1
+  _playAgainButtons: {fileID: 0}
 --- !u!4 &1371441189
 Transform:
   m_ObjectHideFlags: 0
@@ -650,7 +652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SHEPHERD, TAKE YOUR SHOT!
+  m_text: WOLF, PICK A COSTUME!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f2492c5a7d4cbd04c9729e9f9f8848d7, type: 2}
   m_sharedMaterial: {fileID: 8589824156385625747, guid: f2492c5a7d4cbd04c9729e9f9f8848d7, type: 2}
@@ -677,8 +679,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 140
-  m_fontSizeBase: 140
+  m_fontSize: 160
+  m_fontSizeBase: 160
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

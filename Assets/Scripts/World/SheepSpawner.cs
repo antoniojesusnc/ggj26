@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ggj26.Services;
 using MyBox;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace ggj26
         private void Start()
         {
             SpawnSheeps();
-            RhythmManager.Instance.GenerateLevel();
+            ClockService.Instance.AddDelayCall(2, () => RhythmManager.Instance.GenerateLevel());
         }
 
         [ButtonMethod]

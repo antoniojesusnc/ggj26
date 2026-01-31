@@ -83,7 +83,7 @@ namespace ggj26
         {
             Signals.Get<OnGameOverEvent>().Dispatch();
             ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
-            SceneManager.LoadScene(3);
+            ClockService.Instance.AddDelayCall(1, () => SceneManager.LoadScene(3));
         }
 
         private void MakeBeat()

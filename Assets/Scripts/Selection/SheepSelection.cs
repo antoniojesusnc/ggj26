@@ -1,4 +1,5 @@
 using System;
+using ggj26.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,10 @@ namespace ggj26
         [SerializeField] private float sheepSeparationX = 1.0f;
         [SerializeField] private float sheepSeparationY = 1.5f;
         [SerializeField] private int nextSceneID = 0;
+        [SerializeField] private int firstScene = 0;
         [SerializeField] private bool isSelection = true;
+        [SerializeField] private GameObject _playAgainButtons;
+        [SerializeField] private TextMeshProUGUI _headerText;
 
 
         private GameObject[][] sheepFlock;
@@ -190,32 +194,41 @@ namespace ggj26
                 pickedSheep = 15;
             }
 
-            if (isSelection)
-            {
-                RhythmManager.Instance.SetWolfID(pickedSheep);
-            }
-            else
-            {
-                TextMeshPro tmp;
-                tmp = GetComponentInChildren<TextMeshPro>();
-
-                if (pickedSheep == RhythmManager.Instance.WolfID)
-                {
-                    //Wolf dies
-                    tmp.text = "LACK OF GROOVE KILLED THE WOLF";
-                }
-                else
-                {
-                    //A sheep dies
-                    tmp.text = "SMOOTH WOLF... BON APPETIT!";
-                }
-            }
 
             if (pickedSheep >= 0) 
             {
                 wolfChose = true;
-                SceneManager.LoadScene(nextSceneID);
+                    
+                if (isSelection)
+                {
+                    RhythmManager.Instance.SetWolfID(pickedSheep);
+                    SceneManager.LoadScene(nextSceneID);
+                }
+                else
+                {
+                    if (pickedSheep == RhythmManager.Instance.WolfID)
+                    {
+                        //Wolf dies
+                        _headerText.text = "LACK OF GROOVE KILLED THE WOLF";
+                    }
+                    else
+                    {
+                        //A sheep dies
+                        _headerText.text = "SMOOTH WOLF... BON APPETIT!";
+                    }
+                    _playAgainButtons.gameObject.SetActive(true);
+                }
             }
+        }
+
+        public void OnClickInPlayAgain()
+        {
+            SceneManager.LoadScene(firstScene);
+        }
+        
+        public void OnClickInMainMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
