@@ -17,6 +17,7 @@ namespace ggj26
         private void Start()
         {
             SpawnSheeps();
+            RhythmManager.Instance.GenerateLevel();
         }
 
         [ButtonMethod]

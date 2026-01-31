@@ -122,7 +122,6 @@ namespace ggj26
         private void GetSheepSelection()
         {
             if (wolfChose) return;
-            wolfChose = true;
 
             int pickedSheep = -1;
 
@@ -200,7 +199,7 @@ namespace ggj26
                 TextMeshPro tmp;
                 tmp = GetComponentInChildren<TextMeshPro>();
 
-                if (pickedSheep == RhythmManager.Instance.GetWolfID())
+                if (pickedSheep == RhythmManager.Instance.WolfID)
                 {
                     //Wolf dies
                     tmp.text = "LACK OF GROOVE KILLED THE WOLF";
@@ -212,7 +211,11 @@ namespace ggj26
                 }
             }
 
-            SceneManager.LoadScene(nextSceneID);
+            if (pickedSheep >= 0) 
+            {
+                wolfChose = true;
+                SceneManager.LoadScene(nextSceneID);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using ggj26.Services;
 using MyBox;
 using Supyrb;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Urd.Audio;
 using Urd.Services;
 
@@ -82,6 +83,7 @@ namespace ggj26
         {
             Signals.Get<OnGameOverEvent>().Dispatch();
             ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
+            SceneManager.LoadScene(3);
         }
 
         private void MakeBeat()
@@ -120,9 +122,6 @@ namespace ggj26
             Debug.Log("Wolf chose mask #" +  WolfID);
         }
 
-        public int GetWolfID()
-        {
-            return wolfID;
-        }
+        
     }
 }
