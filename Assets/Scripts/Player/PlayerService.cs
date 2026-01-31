@@ -49,6 +49,7 @@ namespace ggj26
         private void UnsubscribeToInputs()
         {
             _playerInput?.Disable();
+            _playerInput?.Dispose();
             _playerInput = null;
         }
 

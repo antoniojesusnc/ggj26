@@ -18,6 +18,7 @@ namespace ggj26
         [SerializeField] private bool isSelection = true;
         [SerializeField] private GameObject _playAgainButtons;
         [SerializeField] private TextMeshProUGUI _headerText;
+        [SerializeField] private GameObject _prePopUp;
 
 
         private GameObject[][] sheepFlock;
@@ -45,6 +46,12 @@ namespace ggj26
                     sheepChar.text = SetSheepChar(sheepSkin);
                     sheepSkin++;
                 }
+            }
+
+
+            if (_playAgainButtons != null)
+            {
+                _playAgainButtons.gameObject.SetActive(false);
             }
         }
 
@@ -125,6 +132,16 @@ namespace ggj26
 
         private void GetSheepSelection()
         {
+            if (isSelection && _prePopUp.activeSelf)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    _prePopUp.gameObject.SetActive(false);
+                }
+
+                return;
+            }
+            
             if (wolfChose) return;
 
             int pickedSheep = -1;
