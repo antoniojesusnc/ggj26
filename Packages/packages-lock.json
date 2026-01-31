@@ -38,6 +38,13 @@
       },
       "hash": "61e29d51d940de15718eb5e6c7c1325ee4248f85"
     },
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "https://github.com/marijnz/unity-toolbar-extender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "84c2d4f5927b0579e18859fecde7f7bb17f634f7"
+    },
     "com.supyrb.signals": {
       "version": "https://github.com/supyrb/signals.git",
       "depth": 0,

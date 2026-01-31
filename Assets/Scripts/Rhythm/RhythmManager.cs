@@ -4,6 +4,8 @@ using ggj26.Services;
 using MyBox;
 using Supyrb;
 using UnityEngine;
+using Urd.Audio;
+using Urd.Services;
 
 namespace ggj26
 {
@@ -34,6 +36,19 @@ namespace ggj26
             BitEachSeconds = 1f/(CurrentLevel.LevelConfig.Bmp / 60f);
             _maxBeat = CurrentLevel.InputsBeats.Max(beat => beat.Beat) + levelConfig.BeatToEnd;
             Signals.Get<OnGameBeginEvent>().Dispatch();
+
+            PlayAudio();
+        }
+
+        private void PlayAudio()
+        {
+            var audioModel = new AudioModel(Ggj26AudioTypes.MainTheme);
+            if(AudioService.Instance.Config.TryGetAudioData(audioModel, out var audioConfigData))
+            {
+                audioModel.SetAudioConfigData(audioConfigData);
+                audioModel.SetAudioClip(CurrentLevel.LevelConfig.AudioClip);
+                AudioService.Instance.PlaySound(audioModel);
+            }
         }
 
         private void CustomUpdate(float deltaTime)
