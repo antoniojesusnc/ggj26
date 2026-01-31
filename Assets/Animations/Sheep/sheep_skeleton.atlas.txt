@@ -1,0 +1,16 @@
+sheep_skeleton.png
+size:512,256
+filter:Linear,Linear
+pma:true
+sheepBody
+bounds:204,122,100,117
+offsets:67,60,230,238
+sheepEars
+bounds:204,96,78,24
+offsets:71,168,230,238
+sheepExtremities
+bounds:2,86,200,153
+offsets:9,12,230,238
+sheepHead
+bounds:2,2,99,82
+offsets:59,142,230,238
