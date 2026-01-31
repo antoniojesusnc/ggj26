@@ -1,6 +1,7 @@
 using System;
 using ggj26;
 using ggj26.Event;
+using MyBox;
 using Supyrb;
 using UnityEngine;
 
@@ -16,6 +17,17 @@ public class DanceFloorGenerator : MonoBehaviour
 
     private void Start()
     {
+        Signals.Get<OnBeatEvent>().AddListener(ChangeFloorColors);
+        
+        
+        CreateDanceFloor();
+        ChangeFloorColors();
+    }
+
+    [ButtonMethod]
+    public void CreateDanceFloor()
+    {
+        CleanFloor();
         danceTiles = new GameObject[danceFloorWidth][];
         for (int i = 0; i < danceFloorWidth; i++)
         {
@@ -26,10 +38,15 @@ public class DanceFloorGenerator : MonoBehaviour
                 danceTiles[i][j].transform.position = transform.position + new Vector3(i, j, 0) * tileSeparation - new Vector3 (danceFloorWidth*tileSeparation/2, danceFloorHeight * tileSeparation / 2, 0);
             }
         }
+    }
 
-        Signals.Get<OnBeatEvent>().AddListener(ChangeFloorColors);
-
-        ChangeFloorColors();
+    [ButtonMethod]
+    public void CleanFloor()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(transform.GetChild(i).gameObject);
+        }
     }
 
     private void OnDestroy()
@@ -37,14 +54,7 @@ public class DanceFloorGenerator : MonoBehaviour
         Signals.Get<OnBeatEvent>().RemoveListener(ChangeFloorColors);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeFloorColors();
-        }
-    }
-
+    [ButtonMethod]
     private void ChangeFloorColors()
     {
         Color color1 = RhythmManager.Instance.Config.Colors[currentColor];

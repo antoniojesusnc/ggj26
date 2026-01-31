@@ -1765,6 +1765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Services
       objectReference: {fileID: 0}
+    - target: {fileID: 7335899096958979883, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
+      propertyPath: autoPlay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8193598609065295025, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

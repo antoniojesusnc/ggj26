@@ -18,6 +18,6 @@ MonoBehaviour:
     <AdditionalClips>k__BackingField: []
     <Volume>k__BackingField: 1
     <Mixer>k__BackingField: 3
-    <Pitch>k__BackingField: 0
+    <Pitch>k__BackingField: 1
     <Loop>k__BackingField: 1
     <FadeOutDuration>k__BackingField: 0

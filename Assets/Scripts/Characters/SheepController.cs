@@ -4,6 +4,7 @@ using Spine.Unity;
 using Supyrb;
 using ggj26.Event;
 using ggj26.Services;
+using MyBox;
 using Random = UnityEngine.Random;
 
 namespace ggj26
@@ -15,6 +16,9 @@ namespace ggj26
         [SerializeField] private SkeletonAnimation sheepSkeleton;
 
         private bool _ignoreNextInputBeat;
+        private Vector2 _directionMovement;
+        private Vector2 _movementArea;
+        private Vector3 _centerPoint;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
@@ -22,6 +26,12 @@ namespace ggj26
             Subscribe();
             
             Signals.Get<OnGameBeginEvent>().AddListener(OnGameBegin);
+            Signals.Get<OnGameOverEvent>().AddListener(OnGameOver);
+        }
+
+        private void OnGameOver()
+        {
+            ClockService.Instance.UnSubscribeToUpdate(CustomUpdate);
         }
 
         private void OnGameBegin()
@@ -57,6 +67,7 @@ namespace ggj26
 
         void OnDestroy()
         {
+            ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
             Signals.Get<OnBeatInputEvent>().RemoveListener(OnMoveSheep);
         }
 
@@ -131,6 +142,63 @@ namespace ggj26
             skeleton.SetSkin("mask" +  skinID.ToString());
             skeleton.SetSlotsToSetupPose();
             sheepSkeleton.AnimationState.Apply(skeleton);
+        }
+
+        public void SetMovement(Vector3 centerPoint, Vector2 movementArea)
+        {
+            _centerPoint = centerPoint;
+            _movementArea = movementArea;
+            _directionMovement = ((Random.insideUnitCircle + transform.position.ToVector2()) - transform.position.ToVector2()).normalized;
+            ClockService.Instance.SubscribeToUpdate(CustomUpdate);
+        }
+
+        private void CustomUpdate(float deltaTime)
+        {
+            transform.Translate(_config.Speed*_directionMovement*deltaTime);
+            CheckDirectionChanged();
+            CapPosition();
+        }
+
+        private void CapPosition()
+        {
+            if (transform.position.x > _centerPoint.x + _movementArea.x * 0.5f)
+            {
+                transform.position = transform.position.SetX(_centerPoint.x + _movementArea.x * 0.5f);
+            }
+            
+            if (transform.position.x < _centerPoint.x - _movementArea.x * 0.5f)
+            {
+                transform.position = transform.position.SetX(_centerPoint.x - _movementArea.x * 0.5f);
+            }
+            if (transform.position.y > _centerPoint.y + _movementArea.y * 0.5f)
+            {
+                transform.position = transform.position.SetY(_centerPoint.y + _movementArea.y * 0.5f);
+            }
+            if (transform.position.y < _centerPoint.y - _movementArea.y * 0.5f)
+            {
+                transform.position = transform.position.SetY(_centerPoint.y - _movementArea.y * 0.5f);
+            }
+        }
+
+        private void CheckDirectionChanged()
+        {
+            if (transform.position.x > _centerPoint.x + _movementArea.x * 0.5f)
+            {
+                _directionMovement = _directionMovement.SetX(-_directionMovement.x);
+            }
+            
+            if (transform.position.x < _centerPoint.x - _movementArea.x * 0.5f)
+            {
+                _directionMovement = _directionMovement.SetX(-_directionMovement.x);
+            }
+            if (transform.position.y > _centerPoint.y + _movementArea.y * 0.5f)
+            {
+                _directionMovement = _directionMovement.SetY(-_directionMovement.y);
+            }
+            if (transform.position.y < _centerPoint.y - _movementArea.y * 0.5f)
+            {
+                _directionMovement = _directionMovement.SetY(-_directionMovement.y);
+            }
         }
     }
 }

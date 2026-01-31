@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5560187270529497921
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463812515623725593, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023409315633035789, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_Name
+      value: PlayerSheep
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720119823502780284, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4783718647123636182, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3023409315633035789, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8091988185091497117}
+  m_SourcePrefab: {fileID: 100100000, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+--- !u!114 &3866362970895328532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8683455194521902677, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+  m_PrefabInstance: {fileID: 5560187270529497921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
+--- !u!1 &7267840157974708556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3023409315633035789, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
+  m_PrefabInstance: {fileID: 5560187270529497921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8091988185091497117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267840157974708556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bd666db7a283c4889c7ffc4075a801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ggj26.PlayerSheepController
+  _config: {fileID: 11400000, guid: cf89831024f6f5242af801fde085179b, type: 2}
+  sheepSkeleton: {fileID: 3866362970895328532}

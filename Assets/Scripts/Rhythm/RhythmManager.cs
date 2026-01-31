@@ -21,7 +21,8 @@ namespace ggj26
         private float _timestamp;
         private int _maxBeat;
 
-        private int wolfID = 0;
+        [field: SerializeField]
+        public int WolfID { get; private set; }
 
         [SerializeField] private bool autoPlay = false;
         
@@ -115,8 +116,8 @@ namespace ggj26
 
         public void SetWolfID (int id)
         {
-            wolfID = id;
-            Debug.Log("Wolf chose mask #" +  wolfID);
+            WolfID = id;
+            Debug.Log("Wolf chose mask #" +  WolfID);
         }
 
         public int GetWolfID()
