@@ -1,0 +1,6 @@
+shepherdSkeleton.png
+size:512,512
+filter:Linear,Linear
+pma:true
+shepherd
+bounds:2,2,435,392
