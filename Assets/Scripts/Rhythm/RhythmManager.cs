@@ -61,6 +61,7 @@ namespace ggj26
         public void GameOver()
         {
             Signals.Get<OnGameOverEvent>().Dispatch();
+            ClockService.Instance?.UnSubscribeToUpdate(CustomUpdate);
         }
 
         private void MakeBeat()

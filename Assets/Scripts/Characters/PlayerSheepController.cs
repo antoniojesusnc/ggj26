@@ -15,6 +15,8 @@ namespace ggj26
         {
             MoveSheep(InputsTypes.None);
         }
+        
+        protected override void AfterAnimation(){}
 
         private void OnDestroy()
         {

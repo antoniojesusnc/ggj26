@@ -52,8 +52,9 @@ namespace ggj26
             }
 
             _ignoreNextInputBeat = true;
-            ClockService.Instance.AddDelayCall(RhythmManager.Instance.BitEachSeconds - _config.AnticipationTime,
-                () => MoveSheep(nextBeat.Input));
+
+            var anticipationTime = RhythmManager.Instance.BitEachSeconds * (1-_config.AnticipationRateFromBeatTime);
+            ClockService.Instance.AddDelayCall(anticipationTime, () => MoveSheep(nextBeat.Input));
         }
 
         void OnDestroy()
@@ -67,13 +68,33 @@ namespace ggj26
             {
                 return;
             }
-            
-            MoveSheep(input);
+
+            if (_config.DelayRate <= 0 || Random.value > _config.DelayRate)
+            {
+                CheckIfWrongRate(input);
+            }
+            else
+            {
+                var delayTime = RhythmManager.Instance.BitEachSeconds * _config.DelayRateFromBeatTime;
+                ClockService.Instance.AddDelayCall(delayTime, () => CheckIfWrongRate(input));
+            }
         }
 
-        protected void MoveSheep(InputsTypes types)
+        private void CheckIfWrongRate(InputsTypes input)
         {
-            switch (types)
+            
+            var newInput = input;
+            if (input != InputsTypes.None && _config.WrongRate > 0 && Random.value < _config.WrongRate)
+            {
+                newInput = input.GetAnyExceptThis();
+            }
+            
+            MoveSheep(newInput);
+        }
+
+        protected void MoveSheep(InputsTypes input)
+        {
+            switch (input)
             {
                 case InputsTypes.None:
                     sheepSkeleton.AnimationState.ClearTracks();
@@ -92,6 +113,18 @@ namespace ggj26
                     sheepSkeleton.AnimationState.SetAnimation(1, "right", false);
                     break;
             }
+
+            if (input != InputsTypes.None)
+            {
+                AfterAnimation();
+            }
+        }
+
+        protected virtual void AfterAnimation()
+        {
+            ClockService.Instance.AddDelayCall(
+                RhythmManager.Instance.BitEachSeconds * _config.BeatRateToComeBackAnimation,
+                () => MoveSheep(InputsTypes.None));
         }
 
         private void SetSheepMask (int skinID)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6511311a7a4473f45b8fa4467c374c10, type: 3}
   m_Name: SheepConfigTest
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
-  <AnticipationRate>k__BackingField: 0.9
-  <AnticipationTime>k__BackingField: 0.1
-  <DelayRate>k__BackingField: 0
-  <DelayTime>k__BackingField: 0
+  <AnticipationRate>k__BackingField: 0.2
+  <AnticipationRateFromBeatTime>k__BackingField: 0.2
+  <DelayRate>k__BackingField: 0.2
+  <DelayRateFromBeatTime>k__BackingField: 0.2
   <WrongRate>k__BackingField: 0
