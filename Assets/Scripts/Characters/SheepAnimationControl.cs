@@ -16,7 +16,7 @@ namespace ggj26
 
             sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
 
-            SetSheepMask(Random.Range(0, 16));
+            //SetSheepMask(Random.Range(0, 16));
         }
 
         private void MoveSheep(InputsTypes types)
@@ -40,7 +40,7 @@ namespace ggj26
             }
         }
 
-        private void SetSheepMask (int skinID)
+        public void SetSheepMask (int skinID)
         {
             var skeleton = sheepSkeleton.Skeleton;
             skeleton.SetSkin("mask" +  skinID.ToString());
