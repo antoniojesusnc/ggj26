@@ -2,7 +2,7 @@ using UnityEngine;
 using Spine.Unity;
 using Supyrb;
 using ggj26.Event;
-using System;
+using Spine;
 
 namespace ggj26
 {
@@ -15,6 +15,8 @@ namespace ggj26
             Signals.Get<OnBeatInputEvent>().AddListener(MoveSheep);
 
             sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
+
+            SetSheepMask(Random.Range(0, 16));
         }
 
         private void MoveSheep(InputsTypes types)
@@ -36,6 +38,14 @@ namespace ggj26
                 case InputsTypes.Size:
                     break;
             }
+        }
+
+        private void SetSheepMask (int skinID)
+        {
+            var skeleton = sheepSkeleton.Skeleton;
+            skeleton.SetSkin("mask" +  skinID.ToString());
+            skeleton.SetSlotsToSetupPose();
+            sheepSkeleton.AnimationState.Apply(skeleton);
         }
 
         // Update is called once per frame
