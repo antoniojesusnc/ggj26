@@ -7,12 +7,10 @@ namespace ggj26
 {
     public class UIRhythmInputs : MonoBehaviour
     {
-        [SerializeField]
-        private Image _image;
-        
+        [SerializeField] private Image _image;
+        [SerializeField] UIRhythmInputsConfig _config;
         public InputsBeat InputBeatData { get; private set;}
         
-        UIRhythmInputsConfig _config;
 
         public void Init(UIRhythmConfig rhythmConfig, InputsBeat inputBeatData)
         {
@@ -31,7 +29,8 @@ namespace ggj26
         {
             if (destroyAfterMove)
             {
-                Destroy(gameObject);
+                _image.DOFade(0, _config.FadeTime).SetLink(gameObject).onComplete += 
+                    ()=> Destroy(gameObject);
             }
         }
     }
