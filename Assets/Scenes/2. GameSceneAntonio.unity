@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3419523853831001119, guid: abe4e93587b346e49a800e06ea3f2854, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529708540965213337, guid: abe4e93587b346e49a800e06ea3f2854, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -674,10 +678,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Services
       objectReference: {fileID: 0}
-    - target: {fileID: 7335899096958979883, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
-      propertyPath: _gameConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: d8214920ecd48f04f9f205039719a01d, type: 2}
     - target: {fileID: 8193598609065295025, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ggj26.Event;
 using Supyrb;
+using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 
 namespace ggj26
@@ -37,7 +38,8 @@ namespace ggj26
         private void OnBeat()
         {
             MoveBeatInputs();
-            if (RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat)
+            
+            if(_beats.Count > 0 && RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat)
             {
                 GenerateBeatInput(_beats[0]);
             }
@@ -77,6 +79,7 @@ namespace ggj26
             var newBeatInput = Instantiate(_config.Prefab, InitialPosition.transform.position, Quaternion.identity, _parent);
             newBeatInput.Init(_config, beat);
             _inputsBeats.Add(newBeatInput);
+            _beats.RemoveAt(0);
         }
     }
 }
