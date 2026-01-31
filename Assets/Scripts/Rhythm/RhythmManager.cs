@@ -18,10 +18,14 @@ namespace ggj26
         
         private float _timestamp;
         private int _maxBeat;
+
+        private int wolfID = 0;
+
+        [SerializeField] private bool autoPlay = false;
         
         void Start()
         {
-            Invoke(nameof(GenerateLevel), 1);
+            if (autoPlay) Invoke(nameof(GenerateLevel), 1);
         }
         public void InitGame(RhythmGameConfig levelConfig)
         {
@@ -92,6 +96,12 @@ namespace ggj26
             var nextBeat = CurrentLevel.InputsBeats.Find(beat => beat.Beat == CurrentBeat + 1);
             inputsBeat = nextBeat;
             return inputsBeat != null;
+        }
+
+        public void SetWolfID (int id)
+        {
+            wolfID = id;
+            Debug.Log("Wolf chose mask #" +  wolfID);
         }
     }
 }
