@@ -22,8 +22,6 @@ namespace ggj26
             Subscribe();
             
             Signals.Get<OnGameBeginEvent>().AddListener(OnGameBegin);
-            
-            SetSheepMask(Random.Range(0, 16));
         }
 
         private void OnGameBegin()
@@ -127,7 +125,7 @@ namespace ggj26
                 () => MoveSheep(InputsTypes.None));
         }
 
-        private void SetSheepMask (int skinID)
+        public void SetSheepMask (int skinID)
         {
             var skeleton = sheepSkeleton.Skeleton;
             skeleton.SetSkin("mask" +  skinID.ToString());
