@@ -31,9 +31,9 @@ namespace ggj26
             CurrentLevel.Init(levelConfig);
             _timestamp += CurrentLevel.LevelConfig.BeatOffset;
             
-            Signals.Get<OnGameBeginEvent>().Dispatch();
             BitEachSeconds = 1f/(CurrentLevel.LevelConfig.Bmp / 60f);
             _maxBeat = CurrentLevel.InputsBeats.Max(beat => beat.Beat) + levelConfig.BeatToEnd;
+            Signals.Get<OnGameBeginEvent>().Dispatch();
         }
 
         private void CustomUpdate(float deltaTime)

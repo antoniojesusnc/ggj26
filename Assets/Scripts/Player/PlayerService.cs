@@ -39,13 +39,16 @@ namespace ggj26
             _playerInput.PlayerInput.Left.performed += (context) => OnPressInput(InputsTypes.Left);
             _playerInput.PlayerInput.Left.canceled += (context) => OnReleaseInput();
             _playerInput.PlayerInput.Right.performed += (context) => OnPressInput(InputsTypes.Right);
+            _playerInput.PlayerInput.Right.canceled += (context) => OnReleaseInput();
             _playerInput.PlayerInput.Up.performed += (context) => OnPressInput(InputsTypes.Up);
+            _playerInput.PlayerInput.Up.canceled += (context) => OnReleaseInput();
             _playerInput.PlayerInput.Down.performed += (context) => OnPressInput(InputsTypes.Down);
+            _playerInput.PlayerInput.Down.canceled += (context) => OnReleaseInput();
         }
 
         private void UnsubscribeToInputs()
         {
-            _playerInput.Disable();
+            _playerInput?.Disable();
             _playerInput = null;
         }
 

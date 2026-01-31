@@ -1,15 +1,19 @@
-using System;
 using ggj26.Event;
 using Supyrb;
 
 namespace ggj26
 {
-    public class PlayerSheepAnimationControl : SheepAnimationControl
+    public class PlayerSheepController : SheepController
     {
-        private void Start()
+        protected override void Subscribe()
         {
-            Signals.Get<OnBeatInputEvent>().RemoveListener(MoveSheep);
             Signals.Get<OnPlayerInputPressEvent>().AddListener(OnPlayerInput);
+            Signals.Get<OnPlayerInputReleaseEvent>().AddListener(OnPlayerInputRelease);
+        }
+
+        private void OnPlayerInputRelease()
+        {
+            MoveSheep(InputsTypes.None);
         }
 
         private void OnDestroy()

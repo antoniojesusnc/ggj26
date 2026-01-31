@@ -179,4 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7231ec6d2f18c949ba7eb1a36d137b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.SheepAnimationControl
+  _config: {fileID: 11400000, guid: cf89831024f6f5242af801fde085179b, type: 2}
   sheepSkeleton: {fileID: 8683455194521902677}

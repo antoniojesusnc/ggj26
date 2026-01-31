@@ -1401,6 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bd666db7a283c4889c7ffc4075a801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.PlayerSheepAnimationControl
+  _config: {fileID: 0}
   sheepSkeleton: {fileID: 1188963867}
 --- !u!1001 &1250367680
 PrefabInstance:
