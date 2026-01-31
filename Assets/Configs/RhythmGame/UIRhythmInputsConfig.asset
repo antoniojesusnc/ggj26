@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
   <AnimationDuration>k__BackingField: 0.2
   <Ease>k__BackingField: 27
+  <FadeTime>k__BackingField: 0.2

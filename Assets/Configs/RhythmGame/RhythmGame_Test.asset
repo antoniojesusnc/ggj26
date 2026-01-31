@@ -17,6 +17,7 @@ MonoBehaviour:
   <BeatOffset>k__BackingField: 0.1
   <InitialWait>k__BackingField: 8
   <Waves>k__BackingField: 5
+  <BeatToEnd>k__BackingField: 5
   <AmountInputsTogetherRange>k__BackingField: {x: 2, y: 5}
   <BeatsBetweenInputsRange>k__BackingField: {x: 5, y: 8}
   <InputsInLevel>k__BackingField: 00000000010000000200000003000000

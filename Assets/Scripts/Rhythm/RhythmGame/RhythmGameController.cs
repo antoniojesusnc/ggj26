@@ -72,10 +72,10 @@ namespace ggj26
 
         private InputsTypes AddSingleInput(List<InputsTypes> inputsTogethersUsed)
         {
-            return LevelConfig.InputsInLevel.GetWeightedRandom((input) => wightRate(input, inputsTogethersUsed));
+            return LevelConfig.InputsInLevel.GetWeightedRandom((input) => WeightRate(input, inputsTogethersUsed));
         }
 
-        private double wightRate(InputsTypes input, List<InputsTypes> inputsTogethersUsed)
+        private double WeightRate(InputsTypes input, List<InputsTypes> inputsTogethersUsed)
         {
             if (inputsTogethersUsed.Contains(input))
             {

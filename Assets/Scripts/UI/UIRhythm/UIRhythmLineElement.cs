@@ -29,6 +29,11 @@ namespace ggj26
             Signals.Get<OnBeatEvent>().AddListener(OnBeat);
         }
 
+        private void OnDestroy()
+        {
+            Signals.Get<OnBeatEvent>().RemoveListener(OnBeat);
+        }
+
         private void SetJump()
         {
             var direction = (FinalPosition.position - InitialPosition.position);

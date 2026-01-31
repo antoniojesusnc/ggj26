@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12a0074543cada47920672186455b3b, type: 3}
   m_Name: UIRhythmConfig
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
-  StepsPerLine: 5
+  StepsPerLine: 7
   BeatsImages:
   - <InputType>k__BackingField: 0
     <Image>k__BackingField: {fileID: 21300000, guid: 3b5ffb9dc57d14dc7868193b7838191d, type: 3}

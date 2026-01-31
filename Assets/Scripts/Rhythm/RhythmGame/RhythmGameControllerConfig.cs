@@ -13,6 +13,7 @@ namespace ggj26
         [field: Header("Level Config")]
         [field: SerializeField] public int InitialWait { get; private set; }
         [field: SerializeField] public int Waves { get; private set; }
+        [field: SerializeField] public int BeatToEnd { get; private set; }
         
         [field: SerializeField] public Vector2Int AmountInputsTogetherRange { get; private set; }
         [field: SerializeField] public Vector2Int BeatsBetweenInputsRange { get; private set; }

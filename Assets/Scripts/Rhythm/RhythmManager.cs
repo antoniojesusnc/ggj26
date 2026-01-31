@@ -1,3 +1,4 @@
+using System.Linq;
 using ggj26.Event;
 using ggj26.Services;
 using MyBox;
@@ -13,10 +14,11 @@ namespace ggj26
         public RhythmGameController CurrentLevel { get; private set; }
         
         public int CurrentBeat { get; private set; }
+        public float BitEachSeconds { get; private set; }
         
         private float _timestamp;
-        private float _bitEachSeconds;
-
+        private int _maxBeat;
+        
         void Start()
         {
             Invoke(nameof(GenerateLevel), 1);
@@ -30,23 +32,49 @@ namespace ggj26
             _timestamp += CurrentLevel.LevelConfig.BeatOffset;
             
             Signals.Get<OnGameBeginEvent>().Dispatch();
-            _bitEachSeconds = 1f/(CurrentLevel.LevelConfig.Bmp / 60f);
+            BitEachSeconds = 1f/(CurrentLevel.LevelConfig.Bmp / 60f);
+            _maxBeat = CurrentLevel.InputsBeats.Max(beat => beat.Beat) + levelConfig.BeatToEnd;
         }
 
         private void CustomUpdate(float deltaTime)
         {
             _timestamp += deltaTime;
 
-            if (_timestamp >= _bitEachSeconds)
+            if (_timestamp >= BitEachSeconds)
             {
-                _timestamp -= _bitEachSeconds;
+                _timestamp -= BitEachSeconds;
                 CurrentBeat++;
                 MakeBeat();
             }
+
+            if (IsGameOver())
+            {
+                GameOver();
+            }
+        }
+
+        private bool IsGameOver()
+        {
+            return CurrentBeat >= _maxBeat;
+        }
+
+        public void GameOver()
+        {
+            Signals.Get<OnGameOverEvent>().Dispatch();
         }
 
         private void MakeBeat()
         {
+            var beatNow = CurrentLevel.InputsBeats.Find(beat => beat.Beat == CurrentBeat);
+            if (beatNow != null)
+            {
+                Signals.Get<OnBeatInputEvent>().Dispatch(beatNow.Input);
+            }
+            else
+            {
+                Signals.Get<OnBeatInputEvent>().Dispatch(InputsTypes.None);
+            }
+            
             Signals.Get<OnBeatEvent>().Dispatch();
         }
 
@@ -56,6 +84,13 @@ namespace ggj26
         public void GenerateLevel()
         {
             InitGame(_gameConfig);
+        }
+
+        public bool TryGetNextBeat(out InputsBeat inputsBeat)
+        {
+            var nextBeat = CurrentLevel.InputsBeats.Find(beat => beat.Beat == CurrentBeat + 1);
+            inputsBeat = nextBeat;
+            return inputsBeat != null;
         }
     }
 }

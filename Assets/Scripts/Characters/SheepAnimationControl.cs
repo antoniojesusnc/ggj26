@@ -17,21 +17,25 @@ namespace ggj26
             sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
         }
 
-        private void MoveSheep(InputsTypes types)
+        public void MoveSheep(InputsTypes types)
         {
             switch (types)
             {
+                case InputsTypes.None:
+                    sheepSkeleton.AnimationState.ClearTracks();
+                    sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
+                    break;
                 case InputsTypes.Up:
-                    sheepSkeleton.AnimationState.SetAnimation(1, "up", false);
+                    sheepSkeleton.AnimationState.AddAnimation(1, "up", false, 0);
                     break;
                 case InputsTypes.Down:
-                    sheepSkeleton.AnimationState.SetAnimation(1, "down", false);
+                    sheepSkeleton.AnimationState.AddAnimation(1, "down", false,0);
                     break;
                 case InputsTypes.Left:
-                    sheepSkeleton.AnimationState.SetAnimation(1, "left", false);
+                    sheepSkeleton.AnimationState.AddAnimation(1, "left", false,0);
                     break;
                 case InputsTypes.Right:
-                    sheepSkeleton.AnimationState.SetAnimation(1, "right", false);
+                    sheepSkeleton.AnimationState.AddAnimation(1, "right", false,0);
                     break;
                 case InputsTypes.Size:
                     break;

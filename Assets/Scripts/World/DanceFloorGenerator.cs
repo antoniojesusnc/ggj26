@@ -1,3 +1,4 @@
+using System;
 using ggj26;
 using ggj26.Event;
 using Supyrb;
@@ -29,6 +30,11 @@ public class DanceFloorGenerator : MonoBehaviour
         Signals.Get<OnBeatEvent>().AddListener(ChangeFloorColors);
 
         ChangeFloorColors();
+    }
+
+    private void OnDestroy()
+    {
+        Signals.Get<OnBeatEvent>().RemoveListener(ChangeFloorColors);
     }
 
     private void Update()
