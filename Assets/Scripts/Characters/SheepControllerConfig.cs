@@ -19,5 +19,8 @@ namespace ggj26
         [field: Header("Animation")]
         [field: SerializeField, Range(0,1)] public float BeatRateToComeBackAnimation { get; private set; }
         
+        [field: Header("Movement")]
+        [field: SerializeField] public float Speed { get; private set; }
+        
     }
 }

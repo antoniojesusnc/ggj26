@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e934f32a43e715b4db38a16c2767c445, type: 3}
   m_Name: GameManagerConfig
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
-  <Bmp>k__BackingField: 80
   <Size>k__BackingField: {x: 1, y: 1}
   <Colors>k__BackingField:
-  - {r: 1, g: 0, b: 1, a: 1}
-  - {r: 0.57229114, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.06865215, a: 1}
-  - {r: 0, g: 0.22188234, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0.6092994, a: 1}
+  - {r: 1, g: 0.3, b: 1, a: 1}
+  - {r: 0.7007844, g: 1, b: 0.3, a: 1}
+  - {r: 1, g: 0.3, b: 0.3494117, a: 1}
+  - {r: 0.3, g: 0.45647055, b: 1, a: 1}
+  - {r: 0.3, g: 1, b: 0.7254902, a: 1}
