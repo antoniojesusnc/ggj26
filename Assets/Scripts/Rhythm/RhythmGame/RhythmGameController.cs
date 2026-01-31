@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Text;
 using MyBox;
-using UnityEditorInternal;
+using UnityEngine;
 
 namespace ggj26
 {
@@ -8,44 +9,66 @@ namespace ggj26
     {
         public List<InputsBeat> InputsBeats { get; private set; } = new List<InputsBeat>();
 
-        private int currentBeat = 0;
         private RhythmGameConfig _rhythmGameConfig;
         
         public void Init(RhythmGameConfig rhythmGameConfig)
         {
+            _rhythmGameConfig = rhythmGameConfig;
             GenerateLevels();
+            DebugLevelGenerated();
+        }
+
+        private void DebugLevelGenerated()
+        {
+            var log = new StringBuilder();
+            int lastBeat = 0;
+            foreach (var inputsBeat in InputsBeats)
+            {
+                if ((lastBeat + 1) < inputsBeat.Beat)
+                {
+                    log.AppendLine($"Wait For: {inputsBeat.Beat}");
+                }
+                    
+                log.AppendLine($"Beat {inputsBeat.Beat}, Input: {inputsBeat.Input}");
+                lastBeat = inputsBeat.Beat;
+            }
+            Debug.Log(log.ToString());
         }
 
         private void GenerateLevels()
         {
-            currentBeat = _rhythmGameConfig.InitialWait;
+            int temporalBeat = _rhythmGameConfig.InitialWait;
+            int temporalWave = 1;
             for (int i = 0; i < _rhythmGameConfig.Waves; i++)
             {
+                temporalWave = i + 1;
                 if (i > 0)
                 {
-                    AddWaitBeat(currentBeat/(float)_rhythmGameConfig.Waves);
+                    temporalBeat = AddWaitBeat(temporalBeat, temporalWave/(float)_rhythmGameConfig.Waves);
                 }
-                AddInputs(currentBeat/(float)_rhythmGameConfig.Waves);
+                temporalBeat = AddInputs(temporalBeat, temporalWave/(float)_rhythmGameConfig.Waves);
             }
         }
 
-        private void AddWaitBeat(float levelRate)
+        private int AddWaitBeat(int temporalBeat, float levelRate)
         {
-            currentBeat = _rhythmGameConfig.BeatsBetweenInputsRange.Vector2LerpRate(levelRate);
+            return temporalBeat + _rhythmGameConfig.BeatsBetweenInputsRange.Vector2IntLerpRate(levelRate);
         }
 
-        private void AddInputs(float levelRate)
+        private int AddInputs(int temporalBeat, float levelRate)
         {
-            var inputsTogethers = _rhythmGameConfig.AmountInputsTogetherRange.Vector2LerpRate(levelRate);
+            var inputsTogethers = _rhythmGameConfig.AmountInputsTogetherRange.Vector2IntLerpRate(levelRate);
             
             List<InputsTypes> inputsTogethersUsed = new ();
             for (int i = 0; i < inputsTogethers; i++)
             {
                 var input = AddSingleInput(inputsTogethersUsed);
                 inputsTogethersUsed.Add(input);
-                InputsBeats.Add(new InputsBeat(currentBeat, input));
-                currentBeat++;
+                InputsBeats.Add(new InputsBeat(temporalBeat, input));
+                temporalBeat++;
             }
+
+            return temporalBeat;
         }
 
         private InputsTypes AddSingleInput(List<InputsTypes> inputsTogethersUsed)
