@@ -149,6 +149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RhythmManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4511134465793777787, guid: 91c1ac6429c291a4aa9903ab63815a66, type: 3}
+      propertyPath: _gameConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: d8214920ecd48f04f9f205039719a01d, type: 2}
     - target: {fileID: 7850050525672867106, guid: 91c1ac6429c291a4aa9903ab63815a66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -16,7 +16,11 @@ namespace ggj26
         
         private float _timestamp;
         private float _bitEachSeconds;
-        
+
+        void Start()
+        {
+            Invoke(nameof(GenerateLevel), 1);
+        }
         public void InitGame(RhythmGameConfig levelConfig)
         {
             _timestamp = 0;

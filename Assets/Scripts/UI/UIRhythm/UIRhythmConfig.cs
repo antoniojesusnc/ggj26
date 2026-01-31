@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Urd.Utils;
 
 namespace ggj26
 {
@@ -15,6 +16,6 @@ namespace ggj26
     public class UIRhythmInputsKeys
     {
         [field: SerializeField] public InputsTypes InputType { get; private set; }
-        [field: SerializeField] public Sprite Image { get; private set; }
+        [field: SerializeField, PreviewSprite] public Sprite Image { get; private set; }
     }
 }

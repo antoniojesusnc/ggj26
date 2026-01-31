@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ggj26.Event;
 using Supyrb;
+using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 
 namespace ggj26
@@ -37,21 +38,26 @@ namespace ggj26
         private void OnBeat()
         {
             MoveBeatInputs();
-            if (RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat)
+            
+            if(_beats.Count > 0 && RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat)
             {
                 GenerateBeatInput(_beats[0]);
             }
-            _beats.RemoveAt(0);
             CheckForRemoveBeats();
         }
 
         private void CheckForRemoveBeats()
         {
+            if (_inputsBeats.Count <= 0)
+            {
+                return;
+            }
+            
             if (RhythmManager.Instance.CurrentBeat > _inputsBeats[0].InputBeatData.Beat)
             {
                 var inputBeat = _inputsBeats[0]; 
                 _inputsBeats.RemoveAt(0);
-                inputBeat.MoveTo(inputBeat.transform.position - _jump, destroyAfterMove: true);
+                inputBeat.MoveTo(inputBeat.transform.position + _jump, destroyAfterMove: true);
             }
         }
 
@@ -61,8 +67,8 @@ namespace ggj26
             {
                 var inputsBeat = _inputsBeats[i];
                 var initialBeat = inputsBeat.InputBeatData.Beat - _config.StepsPerLine;
-                var finalBeat = RhythmManager.Instance.CurrentBeat - inputsBeat.InputBeatData.Beat;
-                float factor = (RhythmManager.Instance.CurrentBeat - initialBeat) / (finalBeat - initialBeat);
+                var finalBeat = inputsBeat.InputBeatData.Beat;
+                float factor = (RhythmManager.Instance.CurrentBeat - initialBeat) / (float)(finalBeat - initialBeat);
                 var position = Vector3.Lerp(InitialPosition.position, FinalPosition.position, factor);
                 _inputsBeats[i].MoveTo(position);
             }
@@ -73,6 +79,7 @@ namespace ggj26
             var newBeatInput = Instantiate(_config.Prefab, InitialPosition.transform.position, Quaternion.identity, _parent);
             newBeatInput.Init(_config, beat);
             _inputsBeats.Add(newBeatInput);
+            _beats.RemoveAt(0);
         }
     }
 }
