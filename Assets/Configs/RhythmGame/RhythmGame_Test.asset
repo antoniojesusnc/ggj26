@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: RhythmGame_Test
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
   <AudioClip>k__BackingField: {fileID: 0}
+  <Bmp>k__BackingField: 80
   <BeatOffset>k__BackingField: 0.1
   <InitialWait>k__BackingField: 8
   <Waves>k__BackingField: 5
-  <AmountInputsTogetherRange>k__BackingField: {x: 2, y: 4}
+  <AmountInputsTogetherRange>k__BackingField: {x: 2, y: 5}
   <BeatsBetweenInputsRange>k__BackingField: {x: 5, y: 8}
   <InputsInLevel>k__BackingField: 00000000010000000200000003000000
   <RateForNewInput>k__BackingField: 1
-  <RateForRepeatInput>k__BackingField: 0.25
+  <RateForRepeatInput>k__BackingField: 0.5

@@ -8,12 +8,11 @@ namespace ggj26
     public class RhythmGameController
     {
         public List<InputsBeat> InputsBeats { get; private set; } = new List<InputsBeat>();
-
-        private RhythmGameConfig _rhythmGameConfig;
+        public RhythmGameConfig LevelConfig { get; private set; }
         
         public void Init(RhythmGameConfig rhythmGameConfig)
         {
-            _rhythmGameConfig = rhythmGameConfig;
+            LevelConfig = rhythmGameConfig;
             GenerateLevels();
             DebugLevelGenerated();
         }
@@ -37,27 +36,27 @@ namespace ggj26
 
         private void GenerateLevels()
         {
-            int temporalBeat = _rhythmGameConfig.InitialWait;
+            int temporalBeat = LevelConfig.InitialWait;
             int temporalWave = 1;
-            for (int i = 0; i < _rhythmGameConfig.Waves; i++)
+            for (int i = 0; i < LevelConfig.Waves; i++)
             {
                 temporalWave = i + 1;
                 if (i > 0)
                 {
-                    temporalBeat = AddWaitBeat(temporalBeat, temporalWave/(float)_rhythmGameConfig.Waves);
+                    temporalBeat = AddWaitBeat(temporalBeat, temporalWave/(float)LevelConfig.Waves);
                 }
-                temporalBeat = AddInputs(temporalBeat, temporalWave/(float)_rhythmGameConfig.Waves);
+                temporalBeat = AddInputs(temporalBeat, temporalWave/(float)LevelConfig.Waves);
             }
         }
 
         private int AddWaitBeat(int temporalBeat, float levelRate)
         {
-            return temporalBeat + _rhythmGameConfig.BeatsBetweenInputsRange.Vector2IntLerpRate(levelRate);
+            return temporalBeat + LevelConfig.BeatsBetweenInputsRange.Vector2IntLerpRate(levelRate);
         }
 
         private int AddInputs(int temporalBeat, float levelRate)
         {
-            var inputsTogethers = _rhythmGameConfig.AmountInputsTogetherRange.Vector2IntLerpRate(levelRate);
+            var inputsTogethers = LevelConfig.AmountInputsTogetherRange.Vector2IntLerpRate(levelRate);
             
             List<InputsTypes> inputsTogethersUsed = new ();
             for (int i = 0; i < inputsTogethers; i++)
@@ -73,18 +72,18 @@ namespace ggj26
 
         private InputsTypes AddSingleInput(List<InputsTypes> inputsTogethersUsed)
         {
-            return _rhythmGameConfig.InputsInLevel.GetWeightedRandom((input) => wightRate(input, inputsTogethersUsed));
+            return LevelConfig.InputsInLevel.GetWeightedRandom((input) => wightRate(input, inputsTogethersUsed));
         }
 
         private double wightRate(InputsTypes input, List<InputsTypes> inputsTogethersUsed)
         {
             if (inputsTogethersUsed.Contains(input))
             {
-                return _rhythmGameConfig.RateForRepeatInput;
+                return LevelConfig.RateForRepeatInput;
             }
             else
             {
-                return _rhythmGameConfig.RateForNewInput;
+                return LevelConfig.RateForNewInput;
             }
         }
     }

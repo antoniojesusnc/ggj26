@@ -5,7 +5,9 @@ namespace ggj26
 {
     public class RhythmGameConfig : ScriptableObject
     {
+        [field: Header("Audio")]
         [field: SerializeField] public AudioClip AudioClip { get; private set; }
+        [field: SerializeField] public int Bmp { get; private set; }
         [field: SerializeField] public float BeatOffset { get; private set; }
         
         [field: Header("Level Config")]

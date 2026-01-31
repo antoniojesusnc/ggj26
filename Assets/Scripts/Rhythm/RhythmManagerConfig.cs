@@ -4,10 +4,6 @@ namespace ggj26
 {
     public class RhythmManagerConfig : ScriptableObject
     {
-        [field: Header("Bmp")]
-        [field: SerializeField]
-        public int Bmp { get; private set; }
-        
         [field: Header("Dance Floor")]
         [field: SerializeField]
         public Vector2 Size { get; private set; } = Vector2.one;

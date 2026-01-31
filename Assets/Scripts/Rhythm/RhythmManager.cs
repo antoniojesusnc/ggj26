@@ -10,32 +10,32 @@ namespace ggj26
     {
         [field: SerializeField]
         public RhythmManagerConfig Config { get; private set; }
+        public RhythmGameController CurrentLevel { get; private set; }
         
-        public float CurrentWave { get; private set; }
         public int CurrentBeat { get; private set; }
         
         private float _timestamp;
-        private RhythmGameConfig _levelConfig;
-
-        private RhythmGameController _currentLevel;
+        private float _bitEachSeconds;
         
         public void InitGame(RhythmGameConfig levelConfig)
         {
-            _levelConfig = levelConfig;
             _timestamp = 0;
             ClockService.Instance?.SubscribeToUpdate(CustomUpdate);
-            _currentLevel = new RhythmGameController();
-            _currentLevel.Init(levelConfig);
-            _timestamp += _levelConfig.BeatOffset;
+            CurrentLevel = new RhythmGameController();
+            CurrentLevel.Init(levelConfig);
+            _timestamp += CurrentLevel.LevelConfig.BeatOffset;
+            
+            Signals.Get<OnGameBeginEvent>().Dispatch();
+            _bitEachSeconds = 1f/(CurrentLevel.LevelConfig.Bmp / 60f);
         }
 
         private void CustomUpdate(float deltaTime)
         {
             _timestamp += deltaTime;
 
-            if (IsTimeToBeat())
+            if (_timestamp >= _bitEachSeconds)
             {
-                _timestamp -= (Config.Bmp / 60f);
+                _timestamp -= _bitEachSeconds;
                 CurrentBeat++;
                 MakeBeat();
             }
@@ -46,12 +46,8 @@ namespace ggj26
             Signals.Get<OnBeatEvent>().Dispatch();
         }
 
-        private bool IsTimeToBeat()
-        {
-            return _timestamp >= (Config.Bmp / 60f);
-        }
-
         [field: SerializeField] public RhythmGameConfig _gameConfig;
+
         [ButtonMethod]
         public void GenerateLevel()
         {
