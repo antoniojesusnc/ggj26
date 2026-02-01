@@ -23,10 +23,13 @@ namespace ggj26
         [SerializeField] private GameObject _playAgainButtons;
         [SerializeField] private TextMeshProUGUI _headerText;
         [SerializeField] private GameObject _prePopUp;
+        [Header("End Scene")]
         [SerializeField] private GameObject _endScene;
         [SerializeField] private float _timeToShowEndGame;
         [SerializeField] private float _timeToScale;
         [SerializeField] private float _timeToMove;
+        [SerializeField] private GameObject _winImage;
+        [SerializeField] private GameObject _loseImage;
 
         private GameObject[][] sheepFlock;
         private int sheepSkin = 0;
@@ -44,9 +47,10 @@ namespace ggj26
                 for (int j = 0; j < sheepColumns; j++)
                 {
                     sheepFlock[i][j] = Instantiate(sheep, transform);
-                    sheepFlock[i][j].transform.position = transform.position 
-                        + new Vector3(j * sheepSeparationX, -i * sheepSeparationY, 0) 
-                        + new Vector3((sheepColumns -1 ) * -sheepSeparationX / 2f, (sheepRows - 1) * sheepSeparationY / 2f, 0);
+                    sheepFlock[i][j].transform.position = transform.position
+                                                          + new Vector3(j * sheepSeparationX, -i * sheepSeparationY, 0)
+                                                          + new Vector3((sheepColumns - 1) * -sheepSeparationX / 2f,
+                                                              (sheepRows - 1) * sheepSeparationY / 2f, 0);
                     sheepControler = sheepFlock[i][j].GetComponent<SheepController>();
                     sheepControler.SetSheepMask(sheepSkin);
                     sheepChar = sheepFlock[i][j].GetComponentInChildren<TextMeshPro>();
@@ -54,7 +58,7 @@ namespace ggj26
                     sheepSkin++;
                 }
             }
-            
+
             if (_playAgainButtons != null)
             {
                 _playAgainButtons.gameObject.SetActive(false);
@@ -71,12 +75,22 @@ namespace ggj26
             {
                 AudioService.Instance.StopSound(RhythmManager.Instance.CurrentLevel.LevelConfig.AudioTypes);
             }
+
+            if (_winImage != null)
+            {
+                _winImage.gameObject.SetActive(false);
+            }
+
+            if (_loseImage != null)
+            {
+                _loseImage.gameObject.SetActive(false);
+            }
         }
 
         private void OnDestroy()
         {
-            AudioService.Instance.StopSound(Ggj26AudioTypes.GameLose);
-            AudioService.Instance.StopSound(Ggj26AudioTypes.GameWin);
+            AudioService.Instance?.StopSound(Ggj26AudioTypes.GameLose);
+            AudioService.Instance?.StopSound(Ggj26AudioTypes.GameWin);
         }
 
         private void Update()
@@ -281,23 +295,26 @@ namespace ggj26
 
             yield return new WaitForSeconds(_timeToShowEndGame);
             
-            ShowMessage(pickedSheep);
+            ShowMessage(sheepSelected);
             
         }
 
-        private void ShowMessage(int pickedSheep)
+        private void ShowMessage(SheepController sheepSelected)
         {
-            if (pickedSheep == RhythmManager.Instance.WolfID)
+            sheepSelected.gameObject.SetActive(false);
+            if (sheepSelected.SkinId == RhythmManager.Instance.WolfID)
             {
                 //Wolf dies
                 _headerText.text = "LACK OF GROOVE KILLED THE WOLF";
                 AudioService.Instance.PlaySound(Ggj26AudioTypes.GameWin);
+                _winImage.gameObject.SetActive(true);
             }
             else
             {
                 //A sheep dies
                 _headerText.text = "SMOOTH WOLF... BON APPETIT!";
                 AudioService.Instance.PlaySound(Ggj26AudioTypes.GameLose);
+                _loseImage.gameObject.SetActive(true);
             }
             _playAgainButtons.gameObject.SetActive(true);
         }

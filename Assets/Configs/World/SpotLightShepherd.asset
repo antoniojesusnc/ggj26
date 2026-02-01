@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpotLightShepherd
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
   <StartDelayRange>k__BackingField: {x: 0.5, y: 0.5}
-  <FlashEachRange>k__BackingField: {x: 1, y: 3}
+  <FlashEachRange>k__BackingField: {x: 0.4, y: 0.8}
   <RotateMaxAngleRange>k__BackingField: {x: 50.967, y: 50.967}
   <RotateSpeedRange>k__BackingField: {x: 0, y: 0}
   <IntensityRange>k__BackingField: {x: 0.7, y: 0.8}
