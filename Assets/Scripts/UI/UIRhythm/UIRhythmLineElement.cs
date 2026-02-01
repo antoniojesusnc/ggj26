@@ -19,13 +19,13 @@ namespace ggj26
         [field: SerializeField] public Image _placeHolder;
         [field: SerializeField] public RectTransform _linePrefab;
         [field: SerializeField] private Color _colorHighligth;
+        [field: SerializeField] private Color _originalColor;
         [field: SerializeField] private Image _inputArea;
 
         private List<UIRhythmInputs> _inputsBeats = new List<UIRhythmInputs>();
         
         private Vector3 _jump;
         private InputsTypes _input;
-        private Color _originalColor;
         private Vector3 _originalScale;
 
         [field: SerializeField]
@@ -39,7 +39,8 @@ namespace ggj26
             SetJump();
             CreateLines();
             
-            _originalColor =  _inputArea.color;
+            //_placeHolder.transform.position = RealFinalPosition - _jump*.5f;
+            
             _originalScale = _inputArea.transform.lossyScale;
         }
 
@@ -80,7 +81,7 @@ namespace ggj26
         {
             float lines = _config.StepsPerLine;
             //var offset = _jump;
-            var offset = _jump*0.1f;
+            var offset = _jump*0.0f;
             
             _linePrefab.position = RealInitialPosition + offset;
             for (int i = 1; i < lines; i++)
@@ -112,7 +113,7 @@ namespace ggj26
         {
             MoveBeatInputs();
             
-            if(_beats.Count > 0 && RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat)
+            if(_beats.Count > 0 && RhythmManager.Instance.CurrentBeat + _config.StepsPerLine == _beats[0].Beat+1)
             {
                 GenerateBeatInput(_beats[0]);
             }
@@ -143,7 +144,7 @@ namespace ggj26
                 var finalBeat = inputsBeat.InputBeatData.Beat;
                 float factor = (RhythmManager.Instance.CurrentBeat - initialBeat) / (float)(finalBeat - initialBeat);
                 var position = Vector3.Lerp(RealInitialPosition, RealFinalPosition, factor);
-                position += _jump*.5f;
+                position -= _jump*.5f;
                 _inputsBeats[i].MoveTo(position);
             }
         }

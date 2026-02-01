@@ -123,7 +123,31 @@ namespace ggj26
 
         public void LoadMainMenu()
         {
+            ResetVars();
             SceneManager.LoadScene(0);
+        }
+
+
+        public void OnPlayAgain()
+        {
+            ResetVars();
+            SceneManager.LoadScene(1);
+        }
+
+        private void ResetVars()
+        {
+            Signals.Get<OnBeatEvent>().Clear();
+            Signals.Get<OnBeatInputEvent>().Clear();
+            Signals.Get<OnPlayerInputPressEvent>().Clear();
+            Signals.Get<OnPlayerInputReleaseEvent>().Clear();
+            Signals.Get<OnGameBeginEvent>().Clear();
+            Signals.Get<OnGameOverEvent>().Clear();
+            
+            
+            
+            CurrentBeat = 0;
+            _timestamp = 0;
+            WolfID = -1;
         }
     }
 }

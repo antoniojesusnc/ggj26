@@ -321,7 +321,7 @@ namespace ggj26
 
         public void OnClickInPlayAgain()
         {
-            SceneManager.LoadScene(firstScene);
+            RhythmManager.Instance.OnPlayAgain(); ;
         }
         
         public void OnClickInMainMenu()

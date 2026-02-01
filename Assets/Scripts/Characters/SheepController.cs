@@ -118,8 +118,8 @@ namespace ggj26
             switch (input)
             {
                 case InputsTypes.None:
-                    sheepSkeleton.AnimationState.ClearTracks();
-                    sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
+                    sheepSkeleton.AnimationState.ClearTrack(1);
+                    //sheepSkeleton.AnimationState.SetAnimation(0, "beat", true);
                     break;
                 case InputsTypes.Up:
                     sheepSkeleton.AnimationState.SetAnimation(1, "up", false);

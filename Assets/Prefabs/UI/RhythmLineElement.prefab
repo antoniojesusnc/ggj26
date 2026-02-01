@@ -58,6 +58,7 @@ MonoBehaviour:
   _placeHolder: {fileID: 0}
   _linePrefab: {fileID: 3712611306452216602}
   _colorHighligth: {r: 0.9622642, g: 0.88730204, b: 0, a: 1}
+  _originalColor: {r: 0.5622641, g: 0.5622641, b: 0.5622641, a: 1}
   _inputArea: {fileID: 6181443193826976071}
 --- !u!1 &1087407988029777063
 GameObject:
