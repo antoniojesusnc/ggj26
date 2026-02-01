@@ -131,6 +131,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Services
       objectReference: {fileID: 0}
+    - target: {fileID: 7335899096958979883, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
+      propertyPath: _gameConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 43af4771e14c4334e804ce14d6732fe6, type: 2}
+    - target: {fileID: 7335899096958979883, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
+      propertyPath: <WolfID>k__BackingField
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8193598609065295025, guid: 31dbca75cf9dad54680a666be3d99fb6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.55565
