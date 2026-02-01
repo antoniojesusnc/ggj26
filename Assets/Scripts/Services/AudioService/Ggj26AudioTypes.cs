@@ -11,5 +11,8 @@ namespace ggj26
         GameLose,
         Shotgun,
         MainMenu,
+        MainTheme01,
+        MainTheme02,
+        MainTheme03,
     }
 }

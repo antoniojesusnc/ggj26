@@ -52,13 +52,7 @@ namespace ggj26
         private void PlayAudio()
         {
             AudioService.Instance.StopSound(Ggj26AudioTypes.MainMenu);
-            var audioModel = new AudioModel(Ggj26AudioTypes.MainTheme);
-            if(AudioService.Instance.Config.TryGetAudioData(audioModel, out var audioConfigData))
-            {
-                audioModel.SetAudioConfigData(audioConfigData);
-                audioModel.SetAudioClip(CurrentLevel.LevelConfig.AudioClip);
-                AudioService.Instance.PlaySound(audioModel);
-            }
+            AudioService.Instance.PlaySound(CurrentLevel.LevelConfig.AudioTypes);
         }
 
         private void CustomUpdate(float deltaTime)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275ffbaa7e712384bbff4f85c6dd98b5, type: 3}
   m_Name: RhythmGame_Test
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
-  <AudioClip>k__BackingField: {fileID: 8300000, guid: ef0be4d250e586d48a11a3af80157345, type: 3}
+  <AudioTypes>k__BackingField: 2
   <Bmp>k__BackingField: 140
   <BeatOffset>k__BackingField: 0.1
   <InitialWait>k__BackingField: 8

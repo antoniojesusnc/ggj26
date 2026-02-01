@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using ggj26.Services;
 using TMPro;
@@ -23,6 +25,8 @@ namespace ggj26
         [SerializeField] private GameObject _prePopUp;
         [SerializeField] private GameObject _endScene;
         [SerializeField] private float _timeToShowEndGame;
+        [SerializeField] private float _timeToScale;
+        [SerializeField] private float _timeToMove;
 
         private GameObject[][] sheepFlock;
         private int sheepSkin = 0;
@@ -63,6 +67,16 @@ namespace ggj26
                     AudioService.Instance.PlaySound(Ggj26AudioTypes.MainMenu);
                 }
             }
+            else
+            {
+                AudioService.Instance.StopSound(RhythmManager.Instance.CurrentLevel.LevelConfig.AudioTypes);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            AudioService.Instance.StopSound(Ggj26AudioTypes.GameLose);
+            AudioService.Instance.StopSound(Ggj26AudioTypes.GameWin);
         }
 
         private void Update()
@@ -233,17 +247,42 @@ namespace ggj26
                 }
                 else
                 {
-                    ChooseOption(pickedSheep);
+                    StartCoroutine(ChooseOptionCoroutine(pickedSheep));
                     enabled = false;
                 }
             }
         }
 
-        private void ChooseOption(int pickedSheep)
+        private IEnumerator ChooseOptionCoroutine(int pickedSheep)
         {
+            List<SheepController> sheeps = new();
+            for (int i = 0; i < sheepFlock.Length; i++)
+            {
+                for (int j = 0; j < sheepFlock[i].Length; j++)
+                {
+                    sheeps.Add(sheepFlock[i][j].GetComponent<SheepController>());
+                }
+            }
+
+            var sheepSelected = sheeps.Find(sheep => sheep.SkinId == pickedSheep);
+            sheeps.Remove(sheepSelected);
+
+            for (int i = 0; i < sheeps.Count; i++)
+            {
+                sheeps[i].transform.DOScale(Vector3.zero, _timeToScale);
+            }
+
+            sheepSelected.transform.DOLocalMove(Vector3.zero, _timeToMove);
+
+            yield return new WaitForSeconds(Mathf.Max(_timeToMove, _timeToScale));
+
             AudioService.Instance.PlaySound(Ggj26AudioTypes.Shotgun);
             _endScene.gameObject.SetActive(true);
-            DOVirtual.DelayedCall(_timeToShowEndGame, () => ShowMessage(pickedSheep));
+
+            yield return new WaitForSeconds(_timeToShowEndGame);
+            
+            ShowMessage(pickedSheep);
+            
         }
 
         private void ShowMessage(int pickedSheep)

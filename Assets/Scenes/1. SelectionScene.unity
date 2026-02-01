@@ -837,7 +837,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5394414929893803923, guid: ba04ce6818ed8254fbe938d2864b4dc5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5471698, g: 0.29122913, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1106,6 +1106,10 @@ MonoBehaviour:
   _playAgainButtons: {fileID: 0}
   _headerText: {fileID: 0}
   _prePopUp: {fileID: 1355407427}
+  _endScene: {fileID: 0}
+  _timeToShowEndGame: 0
+  _timeToScale: 0
+  _timeToMove: 0
 --- !u!4 &1371441189
 Transform:
   m_ObjectHideFlags: 0

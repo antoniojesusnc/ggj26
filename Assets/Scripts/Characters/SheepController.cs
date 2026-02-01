@@ -22,6 +22,7 @@ namespace ggj26
         private bool _inMovement;
         private TimerModel _timeModel;
 
+        public int SkinId { get; private set; }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
         {
@@ -147,6 +148,7 @@ namespace ggj26
 
         public void SetSheepMask (int skinID)
         {
+            SkinId = skinID;
             var skeleton = sheepSkeleton.Skeleton;
             skeleton.SetSkin("mask" +  skinID.ToString());
             skeleton.SetSlotsToSetupPose();
