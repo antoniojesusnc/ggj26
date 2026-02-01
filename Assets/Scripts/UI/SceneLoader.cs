@@ -6,6 +6,7 @@ namespace ggj26
     public class SceneLoader : MonoBehaviour
     {
         //[SerializeField] private string sceneName;
+        [SerializeField] private RhythmGameConfig difficulty;
         public void LoadScene(int sceneID)
         {
             SceneManager.LoadScene(sceneID);
@@ -19,5 +20,12 @@ namespace ggj26
                         UnityEditor.EditorApplication.isPlaying = false;
             #endif
         }
+
+        public void LoadSceneAndDifficulty(int sceneID)
+        {
+            RhythmManager.Instance._gameConfig = difficulty;
+            SceneManager.LoadScene(sceneID);
+        }
+
     }
 }

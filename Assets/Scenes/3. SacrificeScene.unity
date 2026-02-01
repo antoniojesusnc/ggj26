@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466f06a22c249cc45a224f764aabf72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ggj26.SheepSelection
-  sheep: {fileID: 5650424802814352726, guid: c0591134be2761540a20b65d9506e7d1, type: 3}
+  sheep: {fileID: 8683860637478483907, guid: f64934bdbb33f364fb31ed9af91f9bb8, type: 3}
   sheepRows: 2
   sheepColumns: 8
   sheepSeparationX: 1.4

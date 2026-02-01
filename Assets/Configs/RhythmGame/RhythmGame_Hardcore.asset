@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 275ffbaa7e712384bbff4f85c6dd98b5, type: 3}
+  m_Name: RhythmGame_Hardcore
+  m_EditorClassIdentifier: Assembly-CSharp::ggj26.RhythmManagerConfig
+  <AudioTypes>k__BackingField: 2
+  <Bmp>k__BackingField: 280
+  <BeatOffset>k__BackingField: 0.1
+  <InitialWait>k__BackingField: 8
+  <Waves>k__BackingField: 16
+  <BeatToEnd>k__BackingField: 5
+  <AmountInputsTogetherRange>k__BackingField: {x: 12, y: 16}
+  <BeatsBetweenInputsRange>k__BackingField: {x: 1, y: 1}
+  <InputsInLevel>k__BackingField: 00000000010000000200000003000000
+  <RateForNewInput>k__BackingField: 1
+  <RateForRepeatInput>k__BackingField: 0.5

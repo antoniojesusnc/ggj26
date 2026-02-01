@@ -377,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8683455194521902677, guid: f07590cb88a518c4f93e018a5d0cf3c1, type: 3}
       propertyPath: _animationName
-      value: costumeHang
+      value: beat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
