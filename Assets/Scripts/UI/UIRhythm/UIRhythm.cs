@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ggj26.Event;
+using JetBrains.Annotations;
 using Supyrb;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace ggj26
         
         [SerializeField] private UIRhythmConfig _config;
         [SerializeField] private TextMeshProUGUI _currentBeat;
-        [SerializeField] private RectTransform _inputArea;
+        [SerializeField] private List<RectTransform> _inputArea;
         
         private List<UIRhythmLineElement> _lines;
         private RhythmManager _rhythmManager;
@@ -26,6 +27,7 @@ namespace ggj26
             SubscribeToEvents();
             OnBeat();
             SetInputArea();
+            _lines.ForEach(line => line.Init(_config));
         }
 
         private void SetInputArea()
@@ -33,7 +35,7 @@ namespace ggj26
             var rectTransform = GetComponent<RectTransform>();
             var totalSize = rectTransform.sizeDelta.y;
             var stepsSize = totalSize / _config.StepsPerLine;
-            _inputArea.sizeDelta = new Vector2(_inputArea.sizeDelta.x, stepsSize);
+            _inputArea.ForEach(input => input.sizeDelta = new Vector2(input.sizeDelta.x*0.5f, stepsSize));
         }
 
         private void SubscribeToEvents()
@@ -66,7 +68,7 @@ namespace ggj26
                 var input = _lines[i].Input;
                 var beats = _rhythmManager.CurrentLevel.InputsBeats.FindAll(beat => beat.Input == input);
                 beats.Sort(SortByBeat);
-                _lines[i].Init(_config, beats);
+                _lines[i].BeginBeats(beats);
             }
         }
 
