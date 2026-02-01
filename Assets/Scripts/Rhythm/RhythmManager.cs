@@ -12,6 +12,8 @@ namespace ggj26
 {
     public class RhythmManager : Singleton<RhythmManager>
     {
+        
+
         [field: SerializeField]
         public RhythmManagerConfig Config { get; private set; }
         public RhythmGameController CurrentLevel { get; private set; }
@@ -28,7 +30,8 @@ namespace ggj26
         public int WolfID { get; private set; }
 
         [SerializeField] private bool autoPlay = false;
-        
+        private float _totalTime;
+
         void Start()
         {
             if (autoPlay) Invoke(nameof(GenerateLevel), 1);
@@ -39,6 +42,7 @@ namespace ggj26
         {
             CurrentBeat = 0;
             _timestamp = 0;
+            _totalTime = 0;
             ClockService.Instance?.SubscribeToUpdate(CustomUpdate);
             CurrentLevel = new RhythmGameController();
             CurrentLevel.Init(levelConfig);
@@ -60,6 +64,7 @@ namespace ggj26
         private void CustomUpdate(float deltaTime)
         {
             _timestamp += deltaTime;
+            _totalTime += deltaTime;
 
             if (_timestamp >= BitEachSeconds)
             {
@@ -121,6 +126,11 @@ namespace ggj26
             Debug.Log("Wolf chose mask #" +  WolfID);
         }
 
+        public double RemainingTime()
+        {
+            return Mathf.Max((_maxBeat * BitEachSeconds)-_totalTime, 0f);
+        }
+
         public void LoadMainMenu()
         {
             ResetVars();
@@ -147,6 +157,7 @@ namespace ggj26
             
             CurrentBeat = 0;
             _timestamp = 0;
+            _totalTime = 0;
             WolfID = -1;
         }
     }

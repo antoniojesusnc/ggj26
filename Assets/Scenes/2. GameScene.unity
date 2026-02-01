@@ -931,6 +931,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7850756069929561561, guid: abe4e93587b346e49a800e06ea3f2854, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 8559934007990883107, guid: abe4e93587b346e49a800e06ea3f2854, type: 3}
       propertyPath: m_Name
       value: UI Rythm

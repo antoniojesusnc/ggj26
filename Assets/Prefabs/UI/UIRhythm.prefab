@@ -905,6 +905,7 @@ MonoBehaviour:
   - {fileID: 7960974998679450350}
   - {fileID: 207325021950633764}
   - {fileID: 6571078888418272819}
+  _beatsCounter: {fileID: 4894631862297161182}
 --- !u!223 &4079468380109175430
 Canvas:
   m_ObjectHideFlags: 0

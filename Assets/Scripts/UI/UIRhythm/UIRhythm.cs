@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using ggj26.Event;
+using ggj26.Services;
 using JetBrains.Annotations;
 using Supyrb;
 using TMPro;
@@ -11,11 +13,11 @@ namespace ggj26
 {
     public class UIRhythm : MonoBehaviour
     {
-        private const string CURRENT_BEAT_FORMAT = "Beat: {0}";
-        
         [SerializeField] private UIRhythmConfig _config;
         [SerializeField] private TextMeshProUGUI _currentBeat;
         [SerializeField] private List<RectTransform> _inputArea;
+        [SerializeField] private TextMeshProUGUI _beatsCounter;
+        
         
         private List<UIRhythmLineElement> _lines;
         private RhythmManager _rhythmManager;
@@ -25,7 +27,6 @@ namespace ggj26
             _lines = GetComponentsInChildren<UIRhythmLineElement>().ToList();
             _rhythmManager = RhythmManager.Instance;
             SubscribeToEvents();
-            OnBeat();
             SetInputArea();
             _lines.ForEach(line => line.Init(_config));
         }
@@ -41,13 +42,27 @@ namespace ggj26
         private void SubscribeToEvents()
         {
             Signals.Get<OnGameBeginEvent>().AddListener(OnGameBegin);
-            Signals.Get<OnBeatEvent>().AddListener(OnBeat);
+
+            SetTime();
+            ;
+            ClockService.Instance.SubscribeToUpdate(CustomUpdate);
         }
-        
+
+        private void CustomUpdate(float deltaTime)
+        {
+            SetTime();
+        }
+
         private void UnSubscribeToEvents()
         {
             Signals.Get<OnGameBeginEvent>().RemoveListener(OnGameBegin);
-            Signals.Get<OnBeatEvent>().RemoveListener(OnBeat);
+            
+            ClockService.Instance.UnSubscribeToUpdate(CustomUpdate);
+        }
+        
+        private void SetTime()
+        {
+            _beatsCounter.text = TimeSpan.FromSeconds(RhythmManager.Instance.RemainingTime()).ToString(@"mm\:ss");
         }
 
         private void OnDestroy()
@@ -55,14 +70,8 @@ namespace ggj26
             UnSubscribeToEvents();
         }
 
-        private void OnBeat()
-        {
-            _currentBeat.text = string.Format(CURRENT_BEAT_FORMAT, _rhythmManager.CurrentBeat);
-        }
-
         private void OnGameBegin()
         {
-            OnBeat();
             for (int i = 0; i < _lines.Count; i++)
             {
                 var input = _lines[i].Input;
