@@ -30,6 +30,7 @@ namespace ggj26
         [SerializeField] private float _timeToMove;
         [SerializeField] private GameObject _winImage;
         [SerializeField] private GameObject _loseImage;
+        [SerializeField] private DOTweenAnimation fadeOut;
 
         private GameObject[][] sheepFlock;
         private int sheepSkin = 0;
@@ -257,7 +258,8 @@ namespace ggj26
                 if (isSelection)
                 {
                     RhythmManager.Instance.SetWolfID(pickedSheep);
-                    SceneManager.LoadScene(nextSceneID);
+                    StartCoroutine(ChooseCostumeCoroutine(pickedSheep));
+
                 }
                 else
                 {
@@ -265,6 +267,16 @@ namespace ggj26
                     enabled = false;
                 }
             }
+        }
+
+        private IEnumerator ChooseCostumeCoroutine(int pickedSheep)
+        {
+            fadeOut.tween.Play();
+            yield return new WaitForSeconds(2f);
+            AudioService.Instance.PlaySound(Ggj26AudioTypes.Zipper);
+            yield return new WaitForSeconds(2f);
+            SceneManager.LoadScene(nextSceneID);
+
         }
 
         private IEnumerator ChooseOptionCoroutine(int pickedSheep)

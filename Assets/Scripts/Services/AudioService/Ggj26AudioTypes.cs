@@ -14,5 +14,6 @@ namespace ggj26
         MainTheme01,
         MainTheme02,
         MainTheme03,
+        Zipper,
     }
 }
