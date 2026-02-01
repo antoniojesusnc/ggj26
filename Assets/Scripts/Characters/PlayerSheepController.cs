@@ -11,7 +11,7 @@ namespace ggj26
             Signals.Get<OnPlayerInputReleaseEvent>().AddListener(OnPlayerInputRelease);
         }
 
-        private void OnPlayerInputRelease()
+        private void OnPlayerInputRelease(InputsTypes inputsTypes)
         {
             MoveSheep(InputsTypes.None);
         }

@@ -87,6 +87,8 @@ namespace ggj26
             {
                 return;
             }
+            
+            MoveSheep(InputsTypes.None);
 
             if (_config.DelayRate <= 0 || Random.value > _config.DelayRate)
             {

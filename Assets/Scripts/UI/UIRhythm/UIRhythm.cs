@@ -68,7 +68,7 @@ namespace ggj26
                 var input = _lines[i].Input;
                 var beats = _rhythmManager.CurrentLevel.InputsBeats.FindAll(beat => beat.Input == input);
                 beats.Sort(SortByBeat);
-                _lines[i].BeginBeats(beats);
+                _lines[i].BeginBeats(beats, input);
             }
         }
 
