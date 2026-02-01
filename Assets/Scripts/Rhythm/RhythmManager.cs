@@ -30,9 +30,12 @@ namespace ggj26
         void Start()
         {
             if (autoPlay) Invoke(nameof(GenerateLevel), 1);
+            
+            AudioService.Instance.PlaySound(Ggj26AudioTypes.MainMenu);
         }
         public void InitGame(RhythmGameConfig levelConfig)
         {
+            CurrentBeat = 0;
             _timestamp = 0;
             ClockService.Instance?.SubscribeToUpdate(CustomUpdate);
             CurrentLevel = new RhythmGameController();
@@ -48,6 +51,7 @@ namespace ggj26
 
         private void PlayAudio()
         {
+            AudioService.Instance.StopSound(Ggj26AudioTypes.MainMenu);
             var audioModel = new AudioModel(Ggj26AudioTypes.MainTheme);
             if(AudioService.Instance.Config.TryGetAudioData(audioModel, out var audioConfigData))
             {
@@ -122,6 +126,9 @@ namespace ggj26
             Debug.Log("Wolf chose mask #" +  WolfID);
         }
 
-        
+        public void LoadMainMenu()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
