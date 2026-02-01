@@ -187,7 +187,7 @@ namespace Urd.Services
             return audioSources.Find(audioSource => audioSource.isPlaying && audioSource.clip == audioModel.Clip);
         }
 
-        public void StopSound(Enum audioType, Action onStopSound) => StopSound(new AudioModel(audioType), onStopSound);
+        public void StopSound(Ggj26AudioTypes audioType, Action onStopSound = null) => StopSound(new AudioModel(audioType), onStopSound);
         
         public void StopSound(AudioModel audioModel, Action onStopSound)
         {

@@ -7,5 +7,9 @@ namespace ggj26
         None,
         Click,
         MainTheme,
+        GameWin,
+        GameLose,
+        Shotgun,
+        MainMenu,
     }
 }

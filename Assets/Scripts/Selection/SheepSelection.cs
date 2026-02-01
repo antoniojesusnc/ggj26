@@ -1,8 +1,10 @@
 using System;
+using DG.Tweening;
 using ggj26.Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Urd.Services;
 
 namespace ggj26
 {
@@ -19,7 +21,8 @@ namespace ggj26
         [SerializeField] private GameObject _playAgainButtons;
         [SerializeField] private TextMeshProUGUI _headerText;
         [SerializeField] private GameObject _prePopUp;
-
+        [SerializeField] private GameObject _endScene;
+        [SerializeField] private float _timeToShowEndGame;
 
         private GameObject[][] sheepFlock;
         private int sheepSkin = 0;
@@ -47,11 +50,18 @@ namespace ggj26
                     sheepSkin++;
                 }
             }
-
-
+            
             if (_playAgainButtons != null)
             {
                 _playAgainButtons.gameObject.SetActive(false);
+            }
+
+            if (isSelection)
+            {
+                if (!AudioService.Instance.IsSoundOfType(Ggj26AudioTypes.MainMenu))
+                {
+                    AudioService.Instance.PlaySound(Ggj26AudioTypes.MainMenu);
+                }
             }
         }
 
@@ -223,19 +233,34 @@ namespace ggj26
                 }
                 else
                 {
-                    if (pickedSheep == RhythmManager.Instance.WolfID)
-                    {
-                        //Wolf dies
-                        _headerText.text = "LACK OF GROOVE KILLED THE WOLF";
-                    }
-                    else
-                    {
-                        //A sheep dies
-                        _headerText.text = "SMOOTH WOLF... BON APPETIT!";
-                    }
-                    _playAgainButtons.gameObject.SetActive(true);
+                    ChooseOption(pickedSheep);
+                    enabled = false;
                 }
             }
+        }
+
+        private void ChooseOption(int pickedSheep)
+        {
+            AudioService.Instance.PlaySound(Ggj26AudioTypes.Shotgun);
+            _endScene.gameObject.SetActive(true);
+            DOVirtual.DelayedCall(_timeToShowEndGame, () => ShowMessage(pickedSheep));
+        }
+
+        private void ShowMessage(int pickedSheep)
+        {
+            if (pickedSheep == RhythmManager.Instance.WolfID)
+            {
+                //Wolf dies
+                _headerText.text = "LACK OF GROOVE KILLED THE WOLF";
+                AudioService.Instance.PlaySound(Ggj26AudioTypes.GameWin);
+            }
+            else
+            {
+                //A sheep dies
+                _headerText.text = "SMOOTH WOLF... BON APPETIT!";
+                AudioService.Instance.PlaySound(Ggj26AudioTypes.GameLose);
+            }
+            _playAgainButtons.gameObject.SetActive(true);
         }
 
         public void OnClickInPlayAgain()
@@ -245,7 +270,7 @@ namespace ggj26
         
         public void OnClickInMainMenu()
         {
-            SceneManager.LoadScene(0);
+            RhythmManager.Instance.LoadMainMenu();
         }
     }
 }
