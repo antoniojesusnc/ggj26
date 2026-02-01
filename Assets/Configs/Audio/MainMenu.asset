@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Urd.Services.AudioClipConfig
   <Audio>k__BackingField:
     <Type>k__BackingField: 6
-    <Clip>k__BackingField: {fileID: 8300000, guid: ef0be4d250e586d48a11a3af80157345, type: 3}
+    <Clip>k__BackingField: {fileID: 8300000, guid: 320576457eb95d6468c60869f5b1b35c, type: 3}
     <AdditionalClips>k__BackingField: []
     <Volume>k__BackingField: 1
     <Mixer>k__BackingField: 3
