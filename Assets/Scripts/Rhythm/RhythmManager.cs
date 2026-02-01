@@ -22,6 +22,8 @@ namespace ggj26
         private float _timestamp;
         private int _maxBeat;
 
+        [field: SerializeField] public RhythmGameConfig _gameConfig;
+
         [field: SerializeField]
         public int WolfID { get; private set; }
 
@@ -99,7 +101,6 @@ namespace ggj26
             Signals.Get<OnBeatEvent>().Dispatch();
         }
 
-        [field: SerializeField] public RhythmGameConfig _gameConfig;
 
         [ButtonMethod]
         public void GenerateLevel()
